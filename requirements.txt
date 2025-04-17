@@ -1,0 +1,8 @@
+numpy==1.23.5
+pandas==2.2.3
+streamlit
+pickle
+scikit-learn
+pip==24.3.1
+matplotlib
+seaborn
