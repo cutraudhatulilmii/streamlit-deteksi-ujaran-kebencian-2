@@ -6,7 +6,7 @@ from sklearn.svm import SVC
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, f1_score
 from sklearn.ensemble import StackingClassifier
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -90,10 +90,12 @@ if st.button("🔍 Prediksi"):
             st.markdown(f"<p>Probabilitas Ujaran Kebencian: <strong>{proba_ujaran_kebencian:.2f}%</strong></p>", unsafe_allow_html=True)
             st.markdown(f"<p>Probabilitas Bukan Ujaran Kebencian: <strong>{proba_bukan_ujaran_kebencian:.2f}%</strong></p>", unsafe_allow_html=True)
 
-            # Akurasi model
+            # Akurasi dan F1-Score model
             y_test_pred = stacking_model.predict(X_test_vectorized)
             accuracy = accuracy_score(y_test, y_test_pred)
+            f1 = f1_score(y_test, y_test_pred, pos_label='ujaran kebencian')  # sesuaikan label jika perlu
             st.markdown(f"<p>📊 Akurasi Model pada Data Uji: {accuracy*100:.2f}%</p>", unsafe_allow_html=True)
+            st.markdown(f"<p>🎯 F1-Score Model pada Data Uji: <strong>{f1:.2f}</strong></p>", unsafe_allow_html=True)
         else:
             st.warning("⚠️ Format input tidak sesuai. Coba lagi dengan komentar yang valid.")
 
@@ -101,6 +103,6 @@ if st.button("🔍 Prediksi"):
 st.markdown(""" 
 <hr>
 <div style='text-align: center;'>
-    <small>© 2025 - Sistem Deteksi Komentar Ujaran Kebencian (model hybrid SVM + NB)</small>
+    <small>© 2025 - Sistem Deteksi Komentar Ujaran Kebencian (preprocessing ga sempurna (hybrid))</small>
 </div>
 """, unsafe_allow_html=True)
