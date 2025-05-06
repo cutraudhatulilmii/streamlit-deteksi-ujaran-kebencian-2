@@ -92,10 +92,11 @@ if st.button("🔍 Prediksi"):
 
             # Akurasi dan F1-Score model
             y_test_pred = stacking_model.predict(X_test_vectorized)
-            accuracy = accuracy_score(y_test, y_test_pred)
-            f1 = f1_score(y_test, y_test_pred, pos_label='ujaran kebencian')  # sesuaikan label jika perlu
-            st.markdown(f"<p>📊 Akurasi Model pada Data Uji: {accuracy*100:.2f}%</p>", unsafe_allow_html=True)
-            st.markdown(f"<p>🎯 F1-Score Model pada Data Uji: <strong>{f1:.2f}</strong></p>", unsafe_allow_html=True)
+            accuracy = accuracy_score(y_test, y_test_pred) * 100
+            f1 = f1_score(y_test, y_test_pred, pos_label='ujaran kebencian') * 100  # F1 dalam persen
+
+            st.markdown(f"<p>📊 Akurasi Model pada Data Uji: <strong>{accuracy:.2f}%</strong></p>", unsafe_allow_html=True)
+            st.markdown(f"<p>🎯 F1-Score Model pada Data Uji: <strong>{f1:.2f}%</strong></p>", unsafe_allow_html=True)
         else:
             st.warning("⚠️ Format input tidak sesuai. Coba lagi dengan komentar yang valid.")
 
